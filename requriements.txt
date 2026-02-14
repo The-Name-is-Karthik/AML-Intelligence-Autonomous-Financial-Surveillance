@@ -1,0 +1,16 @@
+pandas
+scikit-learn
+catboost
+seaborn
+langchain
+langchain-community
+langchain-groq
+langgraph
+tavily-python
+python-dotenv
+uvicorn
+fastapi
+joblib
+pydantic
+fpdf
+shap
