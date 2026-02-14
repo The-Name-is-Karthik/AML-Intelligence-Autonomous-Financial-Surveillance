@@ -91,22 +91,22 @@ graph TD
 
 ---
 
-## 🔥 Key Technical Features
+## Key Technical Features
 
-### 🧠 Explainable AI (XAI)
+### Explainable AI (XAI)
 Unlike standard "Black Box" models, this system provides **SHAP-based Risk Drivers**. It explains exactly *why* a transaction was flagged (e.g., "Amount is 15x higher than user's 30-day average").
 
-### 🛡️ Privacy-First Forensics
+### Privacy-First Forensics
 Includes a dedicated **PII Redaction Layer** that masks account numbers and sensitive identifiers before data is sent to the LLM, ensuring banking compliance (GDPR/SOC2 readiness).
 
-### 🚀 Production-Ready DevOps
+### Production-Ready DevOps
 *   **Containerized**: Fully Dockerized for consistent deployment.
 *   **Optimized**: Designed to run within the 1GB RAM constraints of an **AWS t3.micro** instance.
 *   **Scalable**: Uses FastAPI with Uvicorn workers for high-concurrency event processing.
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 ```text
 ├── main.py              # FastAPI Production Server
 ├── app.py               # Streamlit Command Center (UI)
@@ -121,7 +121,7 @@ Includes a dedicated **PII Redaction Layer** that masks account numbers and sens
 
 ---
 
-## 📦 Deployment & Setup
+##  Deployment & Setup
 
 ### 1. Prerequisites
 *   Python 3.10+
@@ -147,16 +147,16 @@ pip install -r requriements.txt
 
 ---
 
-## 📍 Why this project is different
+##  Why this project is different
 Most AML systems are "black boxes" that generate thousands of false alerts. This project solves the **"Alert Fatigue"** problem by giving the AI the ability to **reason like a human investigator**, ensuring only truly suspicious cases reach the compliance team.
 
 ---
 
-## 📜 Acknowledgments & Citations
+##  Acknowledgments & Citations
 The data used in this project is sourced from the **SAML-D** research project. If you find this work useful, please cite the original paper:
 
 > B. Oztas, D. Cetinkaya, F. Adedoyin, M. Budka, H. Dogan and G. Aksu, "Enhancing Anti-Money Laundering: Development of a Synthetic Transaction Monitoring Dataset," 2023 IEEE International Conference on e-Business Engineering (ICEBE), Sydney, Australia, 2023, pp. 47-54, doi: 10.1109/ICEBE59045.2023.00028.
 > [Link to Paper](https://ieeexplore.ieee.org/document/10356193)
 
 ---
-*Created by [Your Name]*
+*Created by Karthik Kalikivayi*
