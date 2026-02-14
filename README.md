@@ -20,6 +20,12 @@ Legacy Anti-Money Laundering systems in banks suffer from three critical failure
 
 ## The Multi-Stage Architecture
 
+![Image of Dashboard](dashboard.png)
+
+
+
+
+
 ### Phase 1: The Watchdog (Detection)
 A high-performance **CatBoost** model trained on the synthetic `SAML-D` dataset. It processes transaction sequences in real-time, focusing on behavioral anomalies rather than just static amounts. 
 *   **Key Metrics**: Optimized for PR-AUC to handle extreme class imbalance.
@@ -57,6 +63,8 @@ When the Watchdog flags a transaction, an autonomous **LangGraph Agent (Llama 3.
 
 ### Phase 3: The Reporter (Compliance)
 The Agent generates a professional, legal-grade **PDF Suspicious Activity Report (SAR)**. This report includes the evidence narrative, forensic summary, and a regulatory risk verdict.
+
+![Agent reasoning](agent_reasoning.png)
 
 ### Phase 4: The Flywheel (Continuous Learning)
 Human investigator feedback is used to retrain the Watchdog. The system uses a **Champion vs. Challenger** deployment strategy—the model only updates if the new version is statistically superior to the current one.
