@@ -7,12 +7,11 @@ import os
 
 # --- PAGE CONFIG ---
 st.set_page_config(
-    page_title="AML Intelligence Hub",
-    page_icon="🛡️",
+    page_title="AML Intelligence",
     layout="wide",
 )
 
-# --- PREMIUM STYLING ---
+# ---STYLING ---
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
@@ -51,7 +50,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- API HELPERS ---
-API_BASE = "http://localhost:8000"
+API_BASE = "http://localhost:8000"  
 
 def get_prediction(txn_data):
     try:
@@ -83,19 +82,19 @@ with st.sidebar:
     st.markdown("---")
     st.info("Phase 1-4 Operational")
     
-    if st.button("🔄 Reset Session"):
+    if st.button(" Reset Session"):
         st.session_state.clear()
         st.rerun()
 
 # --- MAIN DASHBOARD ---
-st.title("🛡️ AML Intelligence Hub")
+st.title(" AML Intelligence ")
 st.subheader("Autonomous Financial Surveillance System")
 
 col1, col2 = st.columns([1, 2])
 
 with col1:
-    st.markdown("### 📡 Transaction Input")
-    with st.expander("📝 Manual Transaction Entry", expanded=True):
+    st.markdown("### Transaction Input")
+    with st.expander(" Manual Transaction Entry", expanded=True):
         amount = st.number_input("Transaction Amount ($)", min_value=0.0, value=7500.0)
         sender = st.number_input("Sender Account ID", value=1491989064)
         receiver = st.number_input("Receiver Account ID", value=99887766)
@@ -116,7 +115,7 @@ with col1:
             "Payment_type": payment_type
         }
         
-    if st.button("🚀 Process Transaction", use_container_width=True):
+    if st.button(" Process Transaction", use_container_width=True):
         with st.spinner("Analyzing with Watchdog Model..."):
             result = get_prediction(test_txn)
             st.session_state.last_prediction = result
@@ -128,7 +127,7 @@ with col2:
         score = pred.get('laundering_probability', 0)
         is_risky = pred.get('is_high_risk', False)
         
-        st.markdown(f"### 🎯 Phase 1: Watchdog Results")
+        st.markdown(f"### Phase 1: Watchdog Results")
         
         # Risk Meter
         st.progress(score)
@@ -139,7 +138,7 @@ with col2:
         m_col2.metric("System Status", status)
         
         # --- NEW: RISK DRIVERS ---
-        st.markdown("#### 🔍 Key Risk Drivers")
+        st.markdown("#### Key Risk Drivers")
         drivers = pred.get('risk_drivers', [])
         if drivers:
             # Create a simple vertical bar chart for drivers
@@ -148,19 +147,19 @@ with col2:
             st.caption("Positive scores indicate features that pushed the model toward predicting risk.")
         
         if is_risky:
-            st.markdown(f'<div class="status-alert">🚨 <b>HIGH RISK DETECTED</b><br>Score: {score:.4f}. Immediate investigation required.</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="status-alert"> <b>HIGH RISK DETECTED</b><br>Score: {score:.4f}. Immediate investigation required.</div>', unsafe_allow_html=True)
             
-            if st.button("🔍 Trigger Agentic Investigation (Phase 2)", type="primary"):
+            if st.button(" Trigger Agentic Investigation (Phase 2)", type="primary"):
                 with st.spinner("Agent searching ledger and web..."):
                     inv_result = run_investigation(st.session_state.last_txn['Sender_account'], score)
                     st.session_state.inv_result = inv_result
         else:
-            st.markdown(f'<div class="status-clear">✅ <b>TRANSACTION CLEARED</b><br>Statistical behavior within normal parameters.</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="status-clear"><b>TRANSACTION CLEARED</b><br>Statistical behavior within normal parameters.</div>', unsafe_allow_html=True)
 
 # --- PHASE 2 & 3: INVESTIGATION & REPORTING ---
 if 'inv_result' in st.session_state:
     st.markdown("---")
-    st.title("🕵️ Phase 2 & 3: Forensic Deep-Dive")
+    st.title(" Phase 2 & 3: Forensic Deep-Dive")
     
     inv = st.session_state.inv_result
     
@@ -172,7 +171,7 @@ if 'inv_result' in st.session_state:
         st.markdown(f"> {inv.get('investigation_summary', 'No summary available.')}")
     
     with i_col2:
-        st.markdown("### 📄 Generated Report")
+        st.markdown("### Generated Report")
         report_path = inv.get('report_path', '')
         if report_path:
             st.info(f"Report Generated: {os.path.basename(report_path)}")
@@ -180,15 +179,15 @@ if 'inv_result' in st.session_state:
             # but we can show the path.
             st.code(report_path)
             
-        st.markdown("### 🔄 Phase 4: Human Feedback")
+        st.markdown("### Phase 4: Human Feedback")
         st.markdown("Does this investigation align with the actual risk?")
         
         f_col1, f_col2 = st.columns(2)
-        if f_col1.button("✅ Confirm Crime", use_container_width=True):
+        if f_col1.button(" Confirm Crime", use_container_width=True):
             res = send_feedback(st.session_state.last_txn['Sender_account'], True, score)
             st.toast("Feedback Logged: True Negative prevented.")
             
-        if f_col2.button("❌ False Positive", use_container_width=True):
+        if f_col2.button(" False Positive", use_container_width=True):
             res = send_feedback(st.session_state.last_txn['Sender_account'], False, score)
             st.toast("Feedback Logged: Model will be desensitized.")
 
